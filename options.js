@@ -6,14 +6,13 @@ let options = {
   instancePermission: "",
 };
 
-
 chrome.storage.local.get(options, (item) =>  {
   // load setting.
   console.log(item);
   for (let optionsKey in options) {
     console.log(optionsKey, item[optionsKey]);
     let elm = document.getElementsByName(optionsKey);
-    if (typeof elm !==  'undefined') {
+    if (typeof elm !== 'undefined') {
       elm[0].setAttribute("value", item[optionsKey])
     }
   }
@@ -25,8 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let optionsKey in options) {
       document.getElementsByName(optionsKey);
       let elm = document.getElementsByName(optionsKey);
-      if (typeof elm !==  'undefined') {
-        console.log(elm[0].value);
+      if (typeof elm !== 'undefined') {
         options[optionsKey] = elm[0].value
       }
     }

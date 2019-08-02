@@ -13,13 +13,14 @@
   "content_scripts": [
     {
       "matches": [
-        "http://*/*",
-        "https://*/*"
+        "https://vrchat.net/*",
+        "https://vrchat.com/*",
+        "https://www.vrcw.net/*"
       ],
       "js": [
         "app.js"
       ],
-      "run_at": "document_start"
+      "run_at": "document_end"
     }
   ],
   "permissions": [
