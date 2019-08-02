@@ -3,34 +3,55 @@
 <head>
   <meta charset="utf-8">
   <title>VRChatのインスタンスを固定IDで建てるブラウザ拡張</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
       width: 300px;
-      height: 500px;
+      height: 300px;
     }
   </style>
 </head>
 
 <body>
 
-<label>
-  <input type="text" name="instanceID">
-</label>
-
-<label>
-  <input type="text" name="nonce">
-</label>
-<label>
-  <input type="text" name="userUID">
-</label>
-<label>
-  <input type="text" name="instanceOwnerID">
-</label>
-<label>
-  <input type="text" name="instancePermission">
-</label>
+<p>
+  <label>
+    インスタンスID:<br>
+    <input type="number" maxlength="6" name="instanceID" size="6">
+  </label>
+</p>
+<p>
+  <label>
+    nonce（プライベートインスタンスの場合共有する必要があります）:<br>
+    <input type="text" name="nonce">
+  </label>
+</p>
+<p>
+  <label>
+    自分のUID（プロフィールページのURLの最後の部分）:<br>
+    <input type="text" name="userUID">
+  </label>
+</p>
+<p>
+  <label>
+    インスタンスオーナーのUID（プロフィールページのURLの最後の部分）:<br>
+    <input type="text" name="instanceOwnerID">
+  </label>
+</p>
+<p>
+  <label>
+    インスタンス公開範囲:<br>
+    <select name="instancePermission">
+      <option value="invite">invite</option>
+      <option value="invite+">invite+</option>
+      <option value="friends">friends</option>
+      <option value="friends+">friends+</option>
+      <option value="public">public</option>
+    </select>
+  </label>
+</p>
 <button id="save">保存</button>
+<button id="lunch">lunch</button>
 <script src="options.js"></script>
 </body>
 </html>

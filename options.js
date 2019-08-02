@@ -8,33 +8,40 @@ let options = {
 
 chrome.storage.local.get(options, (item) =>  {
   // load setting.
-  console.log(item);
   for (let optionsKey in options) {
-    console.log(optionsKey, item[optionsKey]);
     let elm = document.getElementsByName(optionsKey);
-    if (typeof elm !== 'undefined') {
-      elm[0].setAttribute("value", item[optionsKey])
-    }
+    elm[0].value = item[optionsKey];
   }
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const save = () => {
     for (let optionsKey in options) {
       document.getElementsByName(optionsKey);
       let elm = document.getElementsByName(optionsKey);
-      if (typeof elm !== 'undefined') {
-        options[optionsKey] = elm[0].value
+      if (optionsKey === 'instancePermission' && elm.tagName === "select") {
+        elm = elm.getElementsByTagName('option')[elm.selectedIndex];
       }
+      options[optionsKey] = elm[0].value
     }
 
-    chrome.storage.local.set(options, () => {
-      console.log("stored");
-    });
-
-  };
-  const saveButton = document.getElementById('save');
-  saveButton.addEventListener('click', save);
+      chrome.storage.local.set(options, () => {
+        console.log("stored");
+        console.log(options);
+      });
+    };
+    const saveButton = document.getElementById('save');
+    saveButton.addEventListener('click', save);
+    const lunchButton = document.getElementById('lunch');
+    lunchButton.addEventListener('click', () => {
+     for (let optionsKey in options) {
+        let elm = document.getElementsByName(optionsKey);
+        if (optionsKey === 'instancePermission' && elm.tagName === "select") {
+          elm = elm.getElementsByTagName('option')[elm.selectedIndex];
+        }
+        options[optionsKey] = elm[0].value
+      }
+      chrome.tabs.create({active: true, url: `vrchat://launch/?ref=vrchat.com&id=${options['world_id']}:${options['instanceID']}~private(${options['instanceOwnerID']})~nonce(${options['nonce']})~canRequestInvite`})
+  });
 });
 

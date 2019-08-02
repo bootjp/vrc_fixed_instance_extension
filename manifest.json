@@ -10,22 +10,9 @@
     "default_popup": "option.html",
     "default_title": "VRChatのインスタンスを固定IDで建てるブラウザ拡張 - 設定画面"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://vrchat.net/*",
-        "https://vrchat.com/*",
-        "https://www.vrcw.net/*"
-      ],
-      "js": [
-        "app.js"
-      ],
-      "run_at": "document_end"
-    }
-  ],
+
   "permissions": [
-    "http://*/*",
-    "https://*/*",
-    "storage"
+    "storage",
+    "tabs"
   ]
 }
