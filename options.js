@@ -1,4 +1,5 @@
 let options = {
+  worldID: "",
   instanceID: "",
   nonce:  "",
   userUID: "",
@@ -10,7 +11,9 @@ chrome.storage.local.get(options, (item) =>  {
   // load setting.
   for (let optionsKey in options) {
     let elm = document.getElementsByName(optionsKey);
-    elm[0].value = item[optionsKey];
+    if (typeof item[optionsKey] !== 'undefined' && typeof elm[0] !== 'undefined') {
+      elm[0].value = item[optionsKey];
+    }
   }
 });
 
@@ -22,7 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (optionsKey === 'instancePermission' && elm.tagName === "select") {
         elm = elm.getElementsByTagName('option')[elm.selectedIndex];
       }
-      options[optionsKey] = elm[0].value
+      if (typeof options[optionsKey] !== 'undefined' && typeof elm[0] !== 'undefined') {
+        options[optionsKey] = elm[0].value
+      }
     }
 
       chrome.storage.local.set(options, () => {
@@ -39,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (optionsKey === 'instancePermission' && elm.tagName === "select") {
           elm = elm.getElementsByTagName('option')[elm.selectedIndex];
         }
-        options[optionsKey] = elm[0].value
+       options[optionsKey] = elm[0].value
       }
       chrome.tabs.create({active: true, url: `vrchat://launch/?ref=vrchat.com&id=${options['world_id']}:${options['instanceID']}~private(${options['instanceOwnerID']})~nonce(${options['nonce']})~canRequestInvite`})
   });
