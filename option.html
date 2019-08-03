@@ -7,59 +7,62 @@
   <style>
     body {
       width: 300px;
-      height: 450px;
+      height: 500px;
     }
   </style>
 </head>
 
 <body>
+<form>
+  <h2>VRCで固定のインスタンスを建てるべんりなやつ</h2>
+  <p>
+    <label>
+      ワールドID(必須):<br>
+      <input type="text" name="worldID" placeholder="wrld_eb7a5096-9c93-41db-a9d7-7b349a5d4815" required>
+    </label>
+  </p>
 
-<h2>VRCで固定のインスタンスを建てるべんりなやつ</h2>
-<p>
-  <label>
-    ワールドID:<br>
-    <input type="text" name="worldID">
-  </label>
-</p>
+  <p>
+    <label>
+      インスタンスID(必須):<br>
+      <input type="number" maxlength="6" name="instanceID" size="6" placeholder="123456" style="width: 50px;" required>
+    </label>
+  </p>
+  <p>
+    <label>
+      自分のUID(必須)<br>（プロフィールページのURLの最後の部分）<br>
+      <input type="text" name="userUID" placeholder="usr_d97adcdc-718b-4361-9b75-2c97c0a4993d">
+    </label>
+  </p>
 
-<p>
-  <label>
-    インスタンスID:<br>
-    <input type="number" maxlength="6" name="instanceID" size="6">
-  </label>
-</p>
-<p>
-  <label>
-    nonce（プライベートインスタンスの場合共有する必要があります）:<br>
-    <input type="text" name="nonce">
-  </label>
-</p>
-<p>
-  <label>
-    自分のUID（プロフィールページのURLの最後の部分）:<br>
-    <input type="text" name="userUID">
-  </label>
-</p>
-<p>
-  <label>
-    インスタンスオーナーのUID（プロフィールページのURLの最後の部分）:<br>
-    <input type="text" name="instanceOwnerID">
-  </label>
-</p>
-<p>
-  <label>
-    インスタンス公開範囲:<br>
-    <select name="instancePermission">
-      <option value="invite">invite</option>
-      <option value="invite+">invite+</option>
-      <option value="friends">friends</option>
-      <option value="friends+">friends+</option>
-      <option value="public">public</option>
-    </select>
-  </label>
-</p>
-<button id="save">save</button>
-<button id="lunch">lunch</button>
-<script src="options.js"></script>
+  <p>
+    <label>
+      インスタンス公開範囲(必須):<br>
+      <select name="instancePermission" required>
+        <option value="private">invite</option>
+        <option value="private~canRequestInvite()">invite+</option>
+        <option value="friends">friends</option>
+        <option value="hidden">friends+</option>
+        <option value="public">public</option>
+      </select>
+    </label>
+  </p>
+  <p>
+    <label>
+      インスタンスオーナーのとする人のUID(オプション):<br>プロフィールページのURLの最後の部分<br>
+      <input type="text" name="instanceOwnerID" placeholder="usr_d97adcdc-718b-4361-9b75-2c97c0a4993d">
+    </label>
+  </p>
+  <p>
+    <label>
+      nonce(オプション):<br>使用する場合はインスタンスに呼ぶメンバーと共有してください<br>インスタンスに入るパスワードのようなものです<br>
+      <input type="text" name="nonce">
+      <button id="nonce_gen">生成する</button>
+    </label>
+  </p>
+  <button id="save">save</button>
+  <button id="lunch">lunch</button>
+  <script src="options.js"></script>
+</form>
 </body>
 </html>
