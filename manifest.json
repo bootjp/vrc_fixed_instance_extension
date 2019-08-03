@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "VRChatのインスタンスを固定IDで建てるブラウザ拡張",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "別にブラウザ拡張である必要ないんだけど、最近のブラウザはなんでもできて便利だね",
   "icons": {
     "128": "icon_128.png"
