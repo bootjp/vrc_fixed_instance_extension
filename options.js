@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let params = {
       ref: "vrchat.com", // なくてもいいんだけど，対策されても良いようにつけておく
       id: `${options['worldID']}:${options['instanceID']}~private(${options['instanceOwnerID']})~nonce(${options['nonce']})~canRequestInvite`
-  };
-  chrome.tabs.create(
+    };
+    chrome.tabs.create(
       {
         active: true,
         url: 'vrchat://launch/?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
