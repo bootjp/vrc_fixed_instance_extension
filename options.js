@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.getElementById('save');
   saveButton.addEventListener('click', save);
   const lunchButton = document.getElementById('lunch');
-
+  //   // lunch時も保存するようにしておく
   lunchButton.addEventListener('click', save);
   lunchButton.addEventListener('click', () => {
     for (let optionsKey in options) {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       url: 'vrchat://launch/?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
     })
   });
-  // lunch時も保存するようにしておく
+
   const gen = document.getElementById('nonce_gen');
   gen.addEventListener('click', () => {
     let ele = document.getElementsByName('nonce')[0];
@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // UUIDv4
-function generateNonce() {
+const generateNonce = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
-}
+};
 
