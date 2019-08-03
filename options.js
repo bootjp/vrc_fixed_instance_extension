@@ -48,10 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       options[optionsKey] = elm[0].value
     }
+    options['instancePermission'] = options['instancePermission'].replace('%%OWNER_ID%%', options['instanceOwnerID']);
     let params = {
       ref: "vrchat.com", // なくてもいいんだけど，対策されても良いようにつけておく
-      id: `${options['worldID']}:${options['instanceID']}~private(${options['instanceOwnerID']})~nonce(${options['nonce']})`
+      id: `${options['worldID']}:${options['instanceID']}~${options['instancePermission']}~nonce(${options['nonce']})`
     };
+
     chrome.tabs.create({
       active: true,
       url: 'vrchat://launch/?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
@@ -61,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gen = document.getElementById('nonce_gen');
   gen.addEventListener('click', () => {
     let ele = document.getElementsByName('nonce')[0];
-    if (ele.value !== ''){
+    if (ele.value !== '') {
       confirm("nonceを新たに生成しますか?")
     }
 
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // UUIDv4
 function generateNonce() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
