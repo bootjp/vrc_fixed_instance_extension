@@ -2,7 +2,6 @@ let options = {
   worldID: "",
   instanceID: "",
   nonce: "",
-  userUID: "",
   instanceOwnerID: "",
   instancePermission: "",
 };
@@ -51,8 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
     options['instancePermission'] = options['instancePermission'].replace('%%OWNER_ID%%', options['instanceOwnerID']);
     let params = {
       ref: "vrchat.com", // なくてもいいんだけど，対策されても良いようにつけておく
-      id: `${options['worldID']}:${options['instanceID']}~${options['instancePermission']}~nonce(${options['nonce']})`
+      id: `${options['worldID']}:${options['instanceID']}~${options['instancePermission']}`
     };
+
+    if (options['nonce'] !== '') {
+      params.id += `~nonce(${options['nonce']})`
+    }
 
     chrome.tabs.create({
       active: true,
