@@ -5,7 +5,6 @@ let options = {
   instanceOwnerID: "",
   instancePermission: "",
 };
-
 chrome.storage.local.get(options, (item) => {
   // load setting.
   for (let optionsKey in options) {
@@ -15,13 +14,22 @@ chrome.storage.local.get(options, (item) => {
     }
   }
 });
+
+/**
+  * @returns {string} UUID V4
+ */
 const generateNonce = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
 };
+
 const save = (e) => {
+  if (checkValidForJS()) {
+    e.preventDefault();
+    return false;
+  }
   for (let optionsKey in options) {
     document.getElementsByName(optionsKey);
     let elm = document.getElementsByName(optionsKey);
@@ -45,7 +53,7 @@ saveButton.addEventListener('click', save);
 const lunchButton = document.getElementById('lunch');
 // lunch時も保存するようにしておく
 lunchButton.addEventListener('click', save);
-lunchButton.addEventListener('click', () => {
+lunchButton.addEventListener('click', (e) => {
   for (let optionsKey in options) {
     let elm = document.getElementsByName(optionsKey);
     if (optionsKey === 'instancePermission' && elm.tagName === "select") {
@@ -62,12 +70,27 @@ lunchButton.addEventListener('click', () => {
   if (options['nonce'] !== '') {
     params.id += `~nonce(${options['nonce']})`
   }
+  if (checkValidForJS()) {
+    e.preventDefault();
+    return false;
+  }
 
   chrome.tabs.create({
     active: true,
     url: 'vrchat://launch/?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
   })
 });
+
+/**
+ * @returns {boolean}
+ */
+const checkValidForJS = () => {
+  let eles = document.querySelectorAll("input[required]:invalid");
+  eles.forEach((ele) =>{
+    ele.style.backgroundColor = "red";
+  });
+  return eles.length !== 0;
+};
 
 
 // UUIDv4
