@@ -26,6 +26,7 @@ const generateNonce = () => {
 };
 
 const save = (e) => {
+  resetValidColor();
   if (checkValidForJS()) {
     e.preventDefault();
     return false;
@@ -70,6 +71,7 @@ lunchButton.addEventListener('click', (e) => {
   if (options['nonce'] !== '') {
     params.id += `~nonce(${options['nonce']})`
   }
+  resetValidColor();
   if (checkValidForJS()) {
     e.preventDefault();
     return false;
@@ -85,11 +87,17 @@ lunchButton.addEventListener('click', (e) => {
  * @returns {boolean}
  */
 const checkValidForJS = () => {
-  let eles = document.querySelectorAll("input[required]:invalid");
+  let eles = document.querySelectorAll('input[required]:invalid');
   eles.forEach((ele) =>{
-    ele.style.backgroundColor = "red";
+    ele.style.backgroundColor = 'red';
   });
   return eles.length !== 0;
+};
+
+const resetValidColor = () => {
+  document.querySelectorAll('input').forEach((ele) =>{
+    ele.style.backgroundColor = null;
+  });
 };
 
 
