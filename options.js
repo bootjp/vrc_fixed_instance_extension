@@ -16,7 +16,7 @@ chrome.storage.local.get(options, (item) => {
 });
 
 /**
-  * @returns {string} UUID V4
+ * @returns {string} UUID V4
  */
 const generateNonce = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -25,6 +25,11 @@ const generateNonce = () => {
   });
 };
 
+/**
+ * setting save to chrome storage.
+ * @param e Event
+ * @returns {boolean} disable bubbling
+ */
 const save = (e) => {
   resetValidColor();
   if (checkValidForJS()) {
@@ -49,12 +54,13 @@ const save = (e) => {
   // disable popup reload
   e.preventDefault();
 };
-const saveButton = document.getElementById('save');
-saveButton.addEventListener('click', save);
-const lunchButton = document.getElementById('lunch');
-// lunch時も保存するようにしておく
-lunchButton.addEventListener('click', save);
-lunchButton.addEventListener('click', (e) => {
+
+/**
+ * lunch vrchat fixed instance.
+ * @param e Event
+ * @returns {boolean}
+ */
+const lunch = (e) => {
   for (let optionsKey in options) {
     let elm = document.getElementsByName(optionsKey);
     if (optionsKey === 'instancePermission' && elm.tagName === "select") {
@@ -81,27 +87,29 @@ lunchButton.addEventListener('click', (e) => {
     active: true,
     url: 'vrchat://launch/?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
   })
-});
+};
 
 /**
+ * HTML5 require check for javascript.
  * @returns {boolean}
  */
 const checkValidForJS = () => {
   let eles = document.querySelectorAll('input[required]:invalid');
-  eles.forEach((ele) =>{
+  eles.forEach((ele) => {
     ele.style.backgroundColor = 'red';
   });
   return eles.length !== 0;
 };
 
+/**
+ * Clear validation status.
+ */
 const resetValidColor = () => {
-  document.querySelectorAll('input').forEach((ele) =>{
+  document.querySelectorAll('input').forEach((ele) => {
     ele.style.backgroundColor = null;
   });
 };
 
-
-// UUIDv4
 const gen = document.getElementById('nonce_gen');
 gen.addEventListener('click', (e) => {
   let ele = document.getElementsByName('nonce')[0];
@@ -109,11 +117,16 @@ gen.addEventListener('click', (e) => {
   if (ele.value !== '' && !window.confirm("nonceを新たに生成しますか?")) {
     return false
   }
-  let n = generateNonce();
-  console.log(n);
-  ele.value = n;
+  ele.value = generateNonce();
 
   // disable popup reload
   e.preventDefault();
 });
+
+const saveButton = document.getElementById('save');
+saveButton.addEventListener('click', save);
+const lunchButton = document.getElementById('lunch');
+// lunch時も保存するようにしておく
+lunchButton.addEventListener('click', save);
+lunchButton.addEventListener('click', lunch);
 

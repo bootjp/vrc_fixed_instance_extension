@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "VRChatのインスタンスを固定IDで建てるブラウザ拡張",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "VRChatのインスタンスを簡単に固定できるツール",
   "icons": {
     "128": "icon_128.png"
@@ -10,7 +10,6 @@
     "default_popup": "option.html",
     "default_title": "VRChatのインスタンスを固定IDで建てるブラウザ拡張 - 設定画面"
   },
-
   "permissions": [
     "storage",
     "tabs"
