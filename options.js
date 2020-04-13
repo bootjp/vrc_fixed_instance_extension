@@ -70,12 +70,11 @@ const lunch = (e) => {
   }
   options['instancePermission'] = options['instancePermission'].replace('%%OWNER_ID%%', options['instanceOwnerID']);
   let params = {
-    ref: "vrchat.com", // なくてもいいんだけど，対策されても良いようにつけておく
-    id: `${options['worldID']}:${options['instanceID']}~${options['instancePermission']}`
+    worldId: `${options['worldID']}&instanceId=${options['instanceID']}~${options['instancePermission']}`
   };
 
   if (options['nonce'] !== '') {
-    params.id += `~nonce(${options['nonce']})`
+    params.worldId += `~nonce(${options['nonce']})`
   }
   resetValidColor();
   if (checkValidForJS()) {
@@ -85,7 +84,7 @@ const lunch = (e) => {
 
   chrome.tabs.create({
     active: true,
-    url: 'vrchat://launch/?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
+    url: 'https://www.vrchat.com/home/launch?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
   })
 };
 
