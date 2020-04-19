@@ -82,10 +82,7 @@ const lunch = (e) => {
     return false;
   }
 
-  chrome.tabs.create({
-    active: true,
-    url: 'https://www.vrchat.com/home/launch?' + Object.keys(params).map(k => k + '=' + params[k]).join('&')
-  })
+  window.open('https://www.vrchat.com/home/launch?' + Object.keys(params).map(k => k + '=' + params[k]).join('&'))
 };
 
 /**
