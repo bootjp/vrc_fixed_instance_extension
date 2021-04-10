@@ -136,5 +136,6 @@ gen.addEventListener("click", (e) => {
 
 const saveButton = document.getElementById("save");
 saveButton.addEventListener("click", save);
+saveButton.addEventListener("click", launch);
 const launchButton = document.getElementById("launch");
 launchButton.addEventListener("click", launch);
