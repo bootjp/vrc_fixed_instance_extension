@@ -136,6 +136,7 @@ gen.addEventListener("click", (e) => {
 });
 
 const inviteMe = (e) => {
+  e.preventDefault();
   for (let optionsKey in options) {
     let elm = document.getElementsByName(optionsKey);
     if (optionsKey === "instancePermission" && elm.tagName === "select") {
@@ -155,20 +156,22 @@ const inviteMe = (e) => {
   }
   resetValidColor();
   if (checkValidForJS()) {
-    e.preventDefault();
-    params += `/invite?apiKey=${VRCHAT_PUBLIC_APIKEY}`;
-
-    fetch(params, {
-      method: "POST",
-      body: data,
-    })
-      .then()
-      .catch();
-
     return false;
   }
 
-  e.preventDefault();
+  params += `/invite?apiKey=${VRCHAT_PUBLIC_APIKEY}`;
+  console.log(params);
+  fetch(params, {
+    method: "POST",
+    body: "",
+  })
+    .then((e) => {
+      console.log(e);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+  return false;
 };
 
 const saveButton = document.getElementById("save");
@@ -176,5 +179,5 @@ saveButton.addEventListener("click", save);
 saveButton.addEventListener("click", launch);
 const launchButton = document.getElementById("launch");
 launchButton.addEventListener("click", launch);
-const inviteMe = document.getElementById("invite_me");
-inviteMe.addEventListener("click", inviteMe);
+const inviteMeButton = document.getElementById("invite_me");
+inviteMeButton.addEventListener("click", inviteMe);
