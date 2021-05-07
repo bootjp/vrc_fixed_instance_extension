@@ -1,3 +1,4 @@
+const VRCHAT_PUBLIC_APIKEY = "JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";
 let options = {
   worldID: "",
   instanceID: "",
@@ -134,8 +135,46 @@ gen.addEventListener("click", (e) => {
   e.preventDefault();
 });
 
+const inviteMe = (e) => {
+  for (let optionsKey in options) {
+    let elm = document.getElementsByName(optionsKey);
+    if (optionsKey === "instancePermission" && elm.tagName === "select") {
+      elm = elm.getElementsByTagName("option")[elm.selectedIndex];
+    }
+    options[optionsKey] = elm[0].value;
+  }
+  options["instancePermission"] = options["instancePermission"].replace(
+    "%%OWNER_ID%%",
+    options["instanceOwnerID"]
+  );
+
+  let params = `https://vrchat.com/api/1/instances/${options["worldID"]}:${options["instanceID"]}~${options["instancePermission"]}`;
+
+  if (options["nonce"] !== "") {
+    params += `~nonce(${options["nonce"]})`;
+  }
+  resetValidColor();
+  if (checkValidForJS()) {
+    e.preventDefault();
+    params += `/invite?apiKey=${VRCHAT_PUBLIC_APIKEY}`;
+
+    fetch(params, {
+      method: "POST",
+      body: data,
+    })
+      .then()
+      .catch();
+
+    return false;
+  }
+
+  e.preventDefault();
+};
+
 const saveButton = document.getElementById("save");
 saveButton.addEventListener("click", save);
 saveButton.addEventListener("click", launch);
 const launchButton = document.getElementById("launch");
 launchButton.addEventListener("click", launch);
+const inviteMe = document.getElementById("invite_me");
+inviteMe.addEventListener("click", inviteMe);
