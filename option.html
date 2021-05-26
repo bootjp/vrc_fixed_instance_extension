@@ -8,6 +8,9 @@
     body {
       width: 300px;
     }
+    select:invalid, input:invalid {
+      border: red solid 3px;
+    }
   </style>
 </head>
 
@@ -17,14 +20,14 @@
   <p>
     <label>
       ワールドID(必須):<br>
-      <input type="text" name="worldID" placeholder="wrld_eb7a5096-9c93-41db-a9d7-7b349a5d4815" required>
+      <input type="text" name="worldID" placeholder="wrld_eb7a5096-9c93-41db-a9d7-7b349a5d4815" pattern="wr?ld_[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}" required>
     </label>
   </p>
 
   <p>
     <label>
       インスタンスID(必須):<br>
-      <input type="number" maxlength="6" name="instanceID" size="6" placeholder="123456" style="width: 50px;" required>
+      <input type="text" name="instanceID" size="10" pattern="[0-9A-Za-z]+" required>
     </label>
   </p>
 
@@ -43,13 +46,13 @@
   <p>
     <label>
       インスタンスオーナーとする人のUID(オプション):<br>プロフィールページのURLの最後の部分<br>
-      <input type="text" name="instanceOwnerID" placeholder="usr_d97adcdc-718b-4361-9b75-2c97c0a4993d">
+      <input type="text" name="instanceOwnerID" placeholder="usr_d97adcdc-718b-4361-9b75-2c97c0a4993d" pattern="usr_[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}">
     </label>
   </p>
   <p>
     <label>
       nonce(オプション):<br>使用する場合はインスタンスに呼ぶメンバーと共有してください<br>インスタンスに入るパスワードのようなものです<br>
-      <input type="text" name="nonce">
+      <input type="text" name="nonce" pattern="([0-9A-F]{64}|[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12})">
       <button id="nonce_gen">生成する</button>
     </label>
   </p>
