@@ -2,4 +2,5 @@
 
 # run by project root
 
-zip -jr ./dist/vrc_fixed_instance_extension.zip ./*
+rm -rf ./dist/*
+zip -jr ./dist/vrc_fixed_instance_extension.zip ./* -x'*.git*'
