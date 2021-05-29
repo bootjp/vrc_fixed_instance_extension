@@ -1,7 +1,8 @@
 # vrc_fixed_instance_extension
-VRChatでワールド固定のインスタンスを建てるブラウザ拡張
 
-VRChatの仕様変更により本ツールは使用できなくなったため、アーカイブしています。
+VRChat でワールド固定のインスタンスを建てるブラウザ拡張
+
+VRChat の仕様変更により本ツールは使用できなくなったため、アーカイブしています。
 
 Browser extension to build world fixed instances in VRChat
 
