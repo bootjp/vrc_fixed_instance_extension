@@ -26,6 +26,18 @@
 
   <p>
     <label>
+      リージョン(必須):<br>
+      <select name="region" required>
+        <option value="" disabled>select</option>
+        <option value="">US</option>
+        <option value="~region(eu)">EU</option>
+        <option value="~region(jp)">JP</option>
+      </select>
+    </label>
+  </p>
+
+  <p>
+    <label>
       インスタンスID(必須):<br>
       <input type="text" name="instanceID" size="10" pattern="[0-9A-Za-z]+" required>
     </label>
@@ -35,11 +47,11 @@
     <label>
       インスタンス公開範囲(必須):<br>
       <select name="instancePermission" required>
-        <option value="private(%%OWNER_ID%%)">invite</option>
-        <option value="private(%%OWNER_ID%%)~canRequestInvite">invite+</option>
-        <option value="friends(%%OWNER_ID%%)">friends</option>
-        <option value="hidden(%%OWNER_ID%%)">friends+</option>
-        <option value="public(%%OWNER_ID%%)">public</option>
+        <option value="~private(%%OWNER_ID%%)">invite</option>
+        <option value="~private(%%OWNER_ID%%)~canRequestInvite">invite+</option>
+        <option value="~friends(%%OWNER_ID%%)">friends</option>
+        <option value="~hidden(%%OWNER_ID%%)">friends+</option>
+        <option value="">public</option>
       </select>
     </label>
   </p>
@@ -52,7 +64,7 @@
   <p>
     <label>
       nonce(オプション):<br>使用する場合はインスタンスに呼ぶメンバーと共有してください<br>インスタンスに入るパスワードのようなものです<br>
-      <input type="text" name="nonce" pattern="([0-9A-F]{64}|[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12})">
+      <input type="text" name="nonce" pattern="([0-9A-F]{48}|[0-9A-F]{64}|[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12})">
       <button id="nonce_gen">生成する</button>
     </label>
   </p>

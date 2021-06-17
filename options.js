@@ -5,6 +5,7 @@ let options = {
   nonce: "",
   instanceOwnerID: "",
   instancePermission: "",
+  region: "",
 };
 chrome.storage.local.get(options, (item) => {
   // load setting.
@@ -81,7 +82,7 @@ const launch = (e) => {
     options["instanceOwnerID"]
   );
   let params = {
-    worldId: `${options["worldID"]}&instanceId=${options["instanceID"]}~${options["instancePermission"]}`,
+    worldId: `${options["worldID"]}&instanceId=${options["instanceID"]}${options["instancePermission"]}${options["region"]}`,
   };
 
   if (options["nonce"] !== "") {
